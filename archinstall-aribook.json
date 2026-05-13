@@ -1,0 +1,76 @@
+{
+  "additional-repositories": ["multilib"],
+  "archinstall-language": "English",
+  "audio_config": {
+    "audio": "pipewire"
+  },
+  "bootloader_config": {
+    "bootloader": "Systemd-boot",
+    "uki": false,
+    "removable": false
+  },
+  "debug": false,
+  "disk_config": {
+    "config_type": "default_layout",
+    "device_modifications": [
+      {
+        "device": "/dev/nvme0n1",
+        "wipe": true
+      }
+    ]
+  },
+  "disk_encryption": null,
+  "hostname": "aribook",
+  "kernels": ["linux"],
+  "locale_config": {
+    "kb_layout": "us",
+    "sys_enc": "UTF-8",
+    "sys_lang": "en_US"
+  },
+  "mirror_config": {
+    "mirror_regions": {
+      "Netherlands": [
+        "https://mirror.nl.leaseweb.net/archlinux/$repo/os/$arch",
+        "https://mirrors.xtom.nl/archlinux/$repo/os/$arch",
+        "https://ftp.nluug.nl/os/Linux/distr/archlinux/$repo/os/$arch"
+      ]
+    }
+  },
+  "network_config": {
+    "type": "nm"
+  },
+  "ntp": true,
+  "offline": false,
+  "packages": [
+    "base",
+    "base-devel",
+    "bash-completion",
+    "dosfstools",
+    "efibootmgr",
+    "fish",
+    "git",
+    "gvfs",
+    "intel-ucode",
+    "linux",
+    "linux-firmware",
+    "linux-headers",
+    "man-db",
+    "man-pages",
+    "nano",
+    "nano-syntax-highlighting",
+    "neovim",
+    "networkmanager",
+    "ntfs-3g",
+    "sof-firmware",
+    "sudo",
+    "tree",
+    "ttf-jetbrains-mono-nerd",
+    "xdg-user-dirs"
+  ],
+  "parallel_downloads": 5,
+  "profile_config": null,
+  "script": "guided",
+  "silent": false,
+  "swap": true,
+  "timezone": "Europe/Amsterdam"
+}
