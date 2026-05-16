@@ -121,6 +121,7 @@
     "networkmanager",
     "ntfs-3g",
     "sof-firmware",
+    "stow",
     "sudo",
     "tree",
     "ttf-jetbrains-mono-nerd",
