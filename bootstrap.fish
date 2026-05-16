@@ -26,7 +26,7 @@ set packages \
     libva-utils mesa noto-fonts noto-fonts-cjk noto-fonts-emoji nwg-look \
     obsidian openssh pacman-contrib pavucontrol pcmanfm pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
-    python-pipx qbz-bin qt5-wayland qt6-wayland ripgrep rsync slurp socat \
+    python-pipx qbz-bin qt5-wayland qt6-wayland ripgrep rsync slurp socat stow \
     tlp \
     ttf-dejavu ttf-liberation ufw unzip upower vulkan-intel waybar-git \
     webapp-manager wget wireplumber wl-clipboard wpa_supplicant \
@@ -42,23 +42,27 @@ fish_add_path -g ~/.local/bin
 yay -S --needed --noconfirm claude-desktop-native
 curl -fsSL https://claude.ai/install.sh | bash
 
-# --- 4. dotfiles (public repo over HTTPS — no SSH key, no gh auth) ---
-echo "==> Cloning dotfiles bare repo over HTTPS..."
-git clone --bare https://github.com/Mahlski/dotfiles.git ~/.dotfiles
+# --- 4. dotfiles (stow from public HTTPS — no SSH key needed) ---
+echo "==> Cloning dotfiles over HTTPS..."
+git clone https://github.com/Mahlski/dotfiles.git ~/dotfiles
 
-echo "==> Checking out dotfiles..."
-set conflicts (git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout 2>&1 | grep -E '^\s+' | string trim)
-if test (count $conflicts) -gt 0
-    echo "==> Backing up pre-existing files with .bak suffix..."
-    for f in $conflicts
-        if test -e ~/$f
-            mv ~/$f ~/$f.bak
-            echo "    backed up: $f"
+echo "==> Stowing dotfiles..."
+cd ~/dotfiles
+for line in (stow -n config claude ssh local 2>&1)
+    if string match -qr 'existing target is neither' -- $line
+        set target (string replace -r '.*: ' '' -- $line)
+        set full ~/$target
+        if test -e $full; and not test -L $full
+            mv $full $full.bak
+            echo "    backed up: $target"
         end
     end
-    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
 end
-git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+stow config claude ssh local
+chmod 600 ~/dotfiles/ssh/.ssh/config
 
-echo "==> Bootstrap complete."
+echo "==> Bootstrap complete. Dotfiles at ~/dotfiles (stow)."
 echo "==> Open a NEW shell, then run:  fish ~/.local/bin/setup/post-install.fish"
+echo ""
+echo "    To push changes later, switch remote to SSH after key setup:"
+echo "    git -C ~/dotfiles remote set-url origin git@github.com:Mahlski/dotfiles.git"
