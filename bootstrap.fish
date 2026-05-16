@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 # aribook fresh-install bootstrap. Run on a fresh minimal Arch install:
-#   curl -fsSL https://raw.githubusercontent.com/Mahlski/aribook-install/main/bootstrap.fish | fish
+#   curl -fsSL https://raw.githubusercontent.com/Mahlski/aribook-install/main/bootstrap.fish -o /tmp/bootstrap.fish && fish /tmp/bootstrap.fish
 
 # --- 1. yay (AUR helper) ---
 if not command -q yay
@@ -40,6 +40,7 @@ echo "==> Installing Claude desktop + Claude Code..."
 mkdir -p ~/.local/bin
 fish_add_path -g ~/.local/bin
 yay -S --needed --noconfirm claude-desktop-native
+or echo "    claude-desktop-native not in AUR — skipping (Claude Code installed below)"
 curl -fsSL https://claude.ai/install.sh | bash
 
 # --- 4. dotfiles (stow from public HTTPS — no SSH key needed) ---
