@@ -35,6 +35,9 @@ set packages \
 yay -S --needed --noconfirm $packages
 xdg-user-dirs-update
 
+# Disable fish welcome message globally (universal var)
+set -U fish_greeting ""
+
 # --- 3. Claude (desktop + code) ---
 echo "==> Installing Claude desktop + Claude Code..."
 mkdir -p ~/.local/bin
