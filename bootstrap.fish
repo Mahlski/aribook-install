@@ -23,7 +23,7 @@ set packages \
     hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
     inetutils \
     intel-media-driver jq kitty less libreoffice-still libreoffice-still-nl \
-    libva-utils mesa noto-fonts noto-fonts-cjk noto-fonts-emoji nwg-look \
+    libva-utils mesa nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
     obsidian openssh pacman-contrib pavucontrol pcmanfm pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
     python-pipx qbz-bin qt5-wayland qt6-wayland ripgrep rsync slurp socat stow \
@@ -48,7 +48,7 @@ git clone https://github.com/Mahlski/dotfiles.git ~/dotfiles
 
 echo "==> Stowing dotfiles..."
 cd ~/dotfiles
-for line in (stow -n config claude ssh local 2>&1)
+for line in (stow -n config claude git local 2>&1)
     if string match -qr 'existing target is neither' -- $line
         set target (string replace -r '.*: ' '' -- $line)
         set full ~/$target
@@ -58,11 +58,21 @@ for line in (stow -n config claude ssh local 2>&1)
         end
     end
 end
-stow config claude ssh local
+stow config claude git local
+
+# ssh: link only .ssh/config (keys live outside the repo); never fold the dir
+if test -e ~/.ssh/config; and not test -L ~/.ssh/config
+    mv ~/.ssh/config ~/.ssh/config.bak
+    echo "    backed up: .ssh/config"
+end
+stow --no-folding ssh
 chmod 600 ~/dotfiles/ssh/.ssh/config
 
 echo "==> Bootstrap complete. Dotfiles at ~/dotfiles (stow)."
 echo "==> Open a NEW shell, then run:  fish ~/.local/bin/setup/post-install.fish"
 echo ""
-echo "    To push changes later, switch remote to SSH after key setup:"
-echo "    git -C ~/dotfiles remote set-url origin git@github.com:Mahlski/dotfiles.git"
+echo "    SSH keys are NOT in the repo. To push changes later, generate a key and"
+echo "    switch the remote to SSH:"
+echo '      ssh-keygen -t ed25519'
+echo "      # add ~/.ssh/id_ed25519.pub to GitHub, then:"
+echo "      git -C ~/dotfiles remote set-url origin git@github.com:Mahlski/dotfiles.git"
