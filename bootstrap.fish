@@ -28,7 +28,7 @@ set packages \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
     python-pipx qbz-bin qt5-wayland qt6-wayland ripgrep rsync slurp socat stow \
     tlp \
-    ttf-dejavu ttf-liberation ufw unzip upower vulkan-intel waybar-git \
+    ttf-dejavu ttf-liberation ttf-sourcecodepro-nerd ufw unzip upower vulkan-intel waybar-git \
     webapp-manager wget wireplumber wl-clipboard wpa_supplicant \
     xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils \
     xwayland-satellite zram-generator

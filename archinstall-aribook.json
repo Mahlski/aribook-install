@@ -125,6 +125,7 @@
     "sudo",
     "tree",
     "ttf-jetbrains-mono-nerd",
+    "ttf-sourcecodepro-nerd",
     "xdg-user-dirs"
   ],
   "parallel_downloads": 5,
