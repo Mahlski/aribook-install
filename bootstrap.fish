@@ -20,7 +20,7 @@ echo "==> Installing packages..."
 set packages \
     acpi aerc alsa-utils blueman bluez bluez-utils brightnessctl btop cliphist \
     dunst fastfetch fd file-roller firefox fuzzel fzf github-cli gimp gnupg grim \
-    hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
+    hyprcaffeine hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
     inetutils \
     intel-media-driver jq kitty less libnotify libreoffice-still libreoffice-still-nl \
     libva-utils lua-language-server mesa nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
