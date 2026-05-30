@@ -45,57 +45,17 @@ fish_add_path -g ~/.local/bin
 yay -S --needed --noconfirm claude-desktop-native
 curl -fsSL https://claude.ai/install.sh | bash
 
-# --- 4. dotfiles (private repo — read-only token clone over HTTPS) ---
-# Repo is private. A fresh box has no SSH key yet, and `gh auth login` device
-# flow fails here (no Secret Service / keyring on minimal Arch). So clone with a
-# fine-grained read-only PAT pasted at the prompt, then scrub it from the repo
-# config. Switch to SSH after key setup (see end of script).
-#
-# NOTE: this script is run as `curl ... | fish`, so stdin is the pipe, not the
-# keyboard. Read the token from /dev/tty so the prompt reaches the terminal.
-echo "==> Cloning private dotfiles repo over HTTPS."
-echo "    Need a fine-grained PAT: repo Mahlski/dotfiles, Contents -> Read-only."
-echo "    Create at: https://github.com/settings/personal-access-tokens/new"
-read -s -P "    Paste dotfiles read token (hidden): " gh_token < /dev/tty
-echo
-git clone https://x-access-token:$gh_token@github.com/Mahlski/dotfiles.git ~/dotfiles
-set -e gh_token
-# scrub the token out of .git/config — leave a clean tokenless HTTPS remote
-git -C ~/dotfiles remote set-url origin https://github.com/Mahlski/dotfiles.git
+# --- 4. dotfiles auth + clone (separate script — needs a real terminal) ---
+# The dotfiles repo is private. Auth uses the GitHub device flow (authorize on
+# your phone), which needs an interactive terminal — this bootstrap runs as
+# `curl ... | fish`, so stdin is the pipe, not the keyboard. We therefore only
+# DOWNLOAD the auth/clone/stow script here; run it next from a real shell.
+echo "==> Fetching dotfiles setup script..."
+curl -fsSL https://raw.githubusercontent.com/Mahlski/aribook-install/main/setup-dotfiles.fish -o ~/setup-dotfiles.fish
 
-echo "==> Stowing dotfiles..."
-cd ~/dotfiles
-for line in (stow -n config claude git local 2>&1)
-    if string match -qr 'existing target is neither' -- $line
-        set target (string replace -r '.*: ' '' -- $line)
-        set full ~/$target
-        if test -e $full; and not test -L $full
-            mv $full $full.bak
-            echo "    backed up: $target"
-        end
-    end
-end
-stow config claude git local
-
-# ssh: link only .ssh/config (keys live outside the repo); never fold the dir
-if test -e ~/.ssh/config; and not test -L ~/.ssh/config
-    mv ~/.ssh/config ~/.ssh/config.bak
-    echo "    backed up: .ssh/config"
-end
-stow --no-folding ssh
-chmod 600 ~/dotfiles/ssh/.ssh/config
-
-echo "==> Bootstrap complete. Dotfiles at ~/dotfiles (stow)."
-echo "==> Open a NEW shell, then run:  fish ~/.local/bin/setup/post-install.fish"
 echo ""
-echo "    After post-install, from a Hyprland session:"
-echo "      fish ~/.local/bin/setup/setup-webapps.fish"
-echo ""
-echo "    After vault (~/Mahlski) is set up:"
-echo "      fish ~/.local/bin/setup/setup-obsidian-mcp.fish"
-echo ""
-echo "    SSH keys are NOT in the repo. To push changes later, generate a key and"
-echo "    switch the remote to SSH:"
-echo '      ssh-keygen -t ed25519'
-echo "      # add ~/.ssh/id_ed25519.pub to GitHub, then:"
-echo "      git -C ~/dotfiles remote set-url origin git@github.com:Mahlski/dotfiles.git"
+echo "==> Bootstrap complete (packages + Claude installed)."
+echo "==> Next, from THIS terminal (not piped), run:"
+echo "      fish ~/setup-dotfiles.fish"
+echo "    It authenticates GitHub on your phone, uploads an SSH key, then"
+echo "    clones + stows the dotfiles repo over SSH."
