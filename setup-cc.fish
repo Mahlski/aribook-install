@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-# Claude Code + Obsidian MCP setup for aribook
+# Claude Code setup for aribook
 #
 # Prerequisites: git, nodejs/npm
 #   sudo pacman -S --needed git nodejs npm
