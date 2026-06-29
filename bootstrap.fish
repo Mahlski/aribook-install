@@ -18,17 +18,17 @@ end
 # --- 2. packages ---
 echo "==> Installing packages..."
 set packages \
-    acpi aerc alsa-utils blueman bluez bluez-utils brightnessctl btop cliphist \
-    dunst fastfetch fd file-roller firefox fuzzel fzf github-cli gimp gnupg grim \
+    acpi aerc alsa-utils arp-scan blueman bluez bluez-utils brightnessctl btop cliphist \
+    dmidecode dunst fastfetch fd file-roller firefox fuzzel fzf git-filter-repo github-cli gimp gnupg grim gst-plugin-pipewire \
     hyprcaffeine hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
     inetutils \
-    intel-media-driver isync jq kitty less libnotify libreoffice-still libreoffice-still-nl \
-    libva-utils lua-language-server mesa msmtp nodejs notmuch noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
+    intel-media-driver isync jq kitty less libnotify libpulse libreoffice-still libreoffice-still-nl \
+    libva-utils lua-language-server mesa mpv-full-build-git msmtp nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
     obsidian openssh pacman-contrib pass pavucontrol pcmanfm pinentry pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
-    python-pipx qbz-bin qt5-wayland qt6-wayland ripgrep rsync slurp smartmontools socat stow \
+    python-pipx qbittorrent qbz-bin qt5-wayland qt6-wayland ripgrep rpi-imager rsync shellcheck slurp smartmontools socat stow syncthing \
     tlp \
-    ttf-dejavu ttf-liberation ttf-sourcecodepro-nerd ufw unzip upower vulkan-intel waybar-git \
+    ttf-dejavu ttf-liberation ttf-sourcecodepro-nerd ufw unzip upower uv vulkan-intel waybar-git \
     webapp-manager wget wireplumber wl-clipboard wpa_supplicant \
     xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils \
     xwayland-satellite zram-generator
