@@ -38,11 +38,10 @@ xdg-user-dirs-update
 # Disable fish welcome message globally (universal var)
 set -U fish_greeting ""
 
-# --- 3. Claude (desktop + code) ---
-echo "==> Installing Claude desktop + Claude Code..."
+# --- 3. Claude Code ---
+echo "==> Installing Claude Code..."
 mkdir -p ~/.local/bin
 fish_add_path -g ~/.local/bin
-yay -S --needed --noconfirm claude-desktop-native
 curl -fsSL https://claude.ai/install.sh | bash
 
 # --- 4. dotfiles auth + clone (separate script — needs a real terminal) ---
