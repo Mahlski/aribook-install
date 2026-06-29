@@ -26,9 +26,9 @@ set packages \
     libva-utils lua-language-server mesa mpv-full-build-git msmtp nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
     obsidian openssh pacman-contrib pass pavucontrol pcmanfm pinentry pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
-    python-pipx qbittorrent qbz-bin qt5-wayland qt6-wayland ripgrep rpi-imager rsync shellcheck slurp smartmontools socat stow syncthing \
+    python-pipx qbittorrent qbz-bin qt5-wayland qt6-wayland ripgrep rpi-imager rsync shellcheck slurp smartmontools socat syncthing \
     tlp \
-    ttf-dejavu ttf-liberation ttf-sourcecodepro-nerd ufw unzip upower uv vulkan-intel waybar-git \
+    ttf-dejavu ttf-liberation ufw unzip upower uv vulkan-intel waybar-git \
     webapp-manager wget wireplumber wl-clipboard wpa_supplicant \
     xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils \
     xwayland-satellite zram-generator
