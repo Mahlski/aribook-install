@@ -18,8 +18,9 @@ end
 # --- 2. packages ---
 echo "==> Installing packages..."
 set packages \
-    acpi aerc alsa-utils arp-scan blueman bluez bluez-utils brightnessctl btop cliphist \
+    acpi alsa-utils arp-scan blueman bluez bluez-utils brightnessctl btop claws-mail cliphist \
     dmidecode dunst fastfetch fd file-roller firefox fuzzel fzf git-filter-repo github-cli gimp gnupg grim gst-plugin-pipewire \
+    gumbo-parser hunspell-en_us hunspell-nl \
     hyprcaffeine hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
     inetutils \
     intel-media-driver isync jq kitty less libnotify libpulse libreoffice-still libreoffice-still-nl \
