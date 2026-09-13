@@ -24,7 +24,7 @@ set packages \
     hyprcaffeine hypridle hyprland hyprlock hyprpaper hyprpolkitagent hyprshutdown \
     inetutils \
     intel-media-driver isync jq kitty less libnotify libpulse libreoffice-still libreoffice-still-nl \
-    libva-utils lua-language-server mesa mpv-full-build-git msmtp nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
+    libva-utils lua-language-server mesa mpv-full-build-git msmtp nodejs notmuch-runtime noto-fonts noto-fonts-cjk noto-fonts-emoji npm nwg-look \
     obsidian openssh pacman-contrib pass pavucontrol pcmanfm pinentry pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
     python-pipx qbittorrent qbz-bin qt5-wayland qt6-wayland ripgrep rpi-imager rsync shellcheck slurp smartmontools socat syncthing \
