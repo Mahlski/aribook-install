@@ -10,54 +10,6 @@
     "removable": false
   },
   "debug": false,
-  "disk_config": {
-    "config_type": "manual_partitioning",
-    "device_modifications": [
-      {
-        "device": "/dev/nvme0n1",
-        "wipe": true,
-        "partitions": [
-          {
-            "btrfs": [],
-            "flags": ["boot"],
-            "fs_type": "fat32",
-            "length": {"sector_size": null, "total_size": null, "unit": "GiB", "value": 1},
-            "mount_options": [],
-            "mountpoint": "/boot",
-            "obj_id": "efi-part",
-            "start": {"sector_size": {"sector_size": null, "total_size": null, "unit": "B", "value": 512}, "total_size": null, "unit": "sectors", "value": 34},
-            "status": "create",
-            "type": "primary"
-          },
-          {
-            "btrfs": [],
-            "flags": [],
-            "fs_type": "swap",
-            "length": {"sector_size": null, "total_size": null, "unit": "GiB", "value": 16},
-            "mount_options": [],
-            "mountpoint": "swap",
-            "obj_id": "swap-part",
-            "start": {"sector_size": {"sector_size": null, "total_size": null, "unit": "B", "value": 512}, "total_size": null, "unit": "MiB", "value": 1050},
-            "status": "create",
-            "type": "primary"
-          },
-          {
-            "btrfs": [],
-            "flags": [],
-            "fs_type": "ext4",
-            "length": {"sector_size": null, "total_size": null, "unit": "%", "value": 100},
-            "mount_options": [],
-            "mountpoint": "/",
-            "obj_id": "root-part",
-            "start": {"sector_size": {"sector_size": null, "total_size": null, "unit": "B", "value": 512}, "total_size": null, "unit": "MiB", "value": 17434},
-            "status": "create",
-            "type": "primary"
-          }
-        ]
-      }
-    ]
-  },
-  "disk_encryption": null,
   "hostname": "aribook",
   "kernels": ["linux"],
   "locale_config": {
@@ -132,6 +84,9 @@
   "profile_config": null,
   "script": "guided",
   "silent": false,
-  "swap": false,
+  "swap": {
+    "enabled": true,
+    "algorithm": "zstd"
+  },
   "timezone": "Europe/Amsterdam"
 }
