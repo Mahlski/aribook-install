@@ -36,6 +36,12 @@ set packages \
 yay -S --needed --noconfirm $packages
 xdg-user-dirs-update
 
+# sshd now, not at post-install: a reinstall that carries identity copies ~/.ssh
+# and the host keys in from ari before setup-dotfiles.fish, so keygen is skipped.
+# Password SSH is open on the LAN until post-install.fish enables ufw.
+echo "==> Enabling sshd..."
+sudo systemctl enable --now sshd
+
 # Disable fish welcome message globally (universal var)
 set -U fish_greeting ""
 
