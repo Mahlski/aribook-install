@@ -59,9 +59,34 @@ curl -fsSL https://claude.ai/install.sh | bash
 echo "==> Fetching dotfiles setup script..."
 curl -fsSL https://raw.githubusercontent.com/Mahlski/aribook-install/main/setup-dotfiles.fish -o ~/setup-dotfiles.fish
 
+# --- 5. Tailscale ---
+# MagicDNS needs systemd-resolved: without it tailscaled and NM fight over
+# /etc/resolv.conf. Last step: the NM restart drops wifi briefly, and nothing
+# downloads after it. NM is restarted only when the config changed.
+echo "==> Enabling systemd-resolved + tailscaled..."
+sudo systemctl enable --now systemd-resolved
+set nm_restart 0
+if test "$(readlink /etc/resolv.conf)" != /run/systemd/resolve/stub-resolv.conf
+    sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+    set nm_restart 1
+end
+set nmconf /etc/NetworkManager/conf.d/99-tailscale.conf
+if not test -f $nmconf
+    printf '[keyfile]\nunmanaged-devices=interface-name:tailscale0\n' | sudo tee $nmconf >/dev/null
+    set nm_restart 1
+end
+if test $nm_restart = 1
+    sudo systemctl restart NetworkManager
+end
+sudo systemctl enable --now tailscaled
+
 echo ""
 echo "==> Bootstrap complete (packages + Claude installed)."
 echo "==> Next, from THIS terminal (not piped), run:"
 echo "      fish ~/setup-dotfiles.fish"
 echo "    It authenticates GitHub on your phone, uploads an SSH key, then"
 echo "    clones + stows the dotfiles repo over SSH."
+echo ""
+echo "==> Then join the tailnet (prints a URL; log in with GitHub):"
+echo "      sudo tailscale up"
+echo "      sudo tailscale set --operator=guido"
