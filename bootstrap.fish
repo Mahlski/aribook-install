@@ -28,7 +28,7 @@ set packages \
     obsidian openssh pacman-contrib pass pavucontrol pcmanfm pinentry pipewire \
     pipewire-alsa pipewire-jack pipewire-pulse pkgfile playerctl powertop \
     python-pipx qbittorrent qt5-wayland qt6-wayland ripgrep rpi-imager rsync shellcheck slurp smartmontools socat syncthing \
-    tlp \
+    tailscale tlp \
     ttf-dejavu ttf-liberation ufw unzip upower uv vlc vlc-plugins-all vulkan-intel waybar-git \
     webapp-manager wget wireplumber wl-clipboard wpa_supplicant \
     xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils \
